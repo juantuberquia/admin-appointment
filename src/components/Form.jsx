@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import uuid from "uuid/v4";
 
 const Form = () => {
   // crear state citas
-  const [cita, setCitas] = useState({
+  const [cita, setCita] = useState({
     pet: "",
     owner: "",
     date: "",
@@ -10,9 +11,15 @@ const Form = () => {
     symptoms: "",
   });
 
+  // state error campos vacios
+  const [error, setError] = useState(false);
+
+  // state crear cita
+  const [citas, setCitas] = useState([]);
+
   // actualizo el estado de cita
   const setState = (event) => {
-    setCitas({
+    setCita({
       ...cita,
       [event.target.name]: event.target.value,
     });
@@ -20,8 +27,6 @@ const Form = () => {
 
   // asignar los datos a las variables
   const { pet, owner, date, hour, symptoms } = cita;
-
-  const [error, setError] = useState(false);
 
   // validar campos del form
   const submitCita = (e) => {
@@ -37,10 +42,25 @@ const Form = () => {
       setError(true);
       return;
     }
+    setError(false);
+
+    // asignar id a cada cita
+    cita.id = uuid();
+
+    // crear cita
+    setCitas([...citas, cita]);
+
+    // reiniciar el form
+    setCita({
+      pet: "",
+      owner: "",
+      date: "",
+      hour: "",
+      symptoms: "",
+    });
   };
 
-  // modularizar este archivi
-  // averiguar como mostrar el campo vacio especifico
+  // modularizar este archivi submit cita
 
   return (
     <div className="container">
@@ -49,7 +69,7 @@ const Form = () => {
         <div className="one-half column">
           <h2>crear una cita</h2>
           {error ? (
-            <p className="alerta-error"> rellenar todos los campos</p>
+            <p className="alerta-error"> llenar todos los campos</p>
           ) : null}
           <form onSubmit={submitCita}>
             <label> Nombre de mascota</label>
@@ -100,7 +120,7 @@ const Form = () => {
             </button>
           </form>
         </div>
-        <div className="one-half column"> </div>
+        <div className="one-half column">2</div>
       </div>
     </div>
   );
