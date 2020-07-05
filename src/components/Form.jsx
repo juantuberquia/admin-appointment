@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import uuid from "uuid/v4";
+import Appointment from "./Appointment";
 
 const Form = () => {
-  // crear state citas
+  // crear state cita
   const [cita, setCita] = useState({
     pet: "",
     owner: "",
@@ -11,10 +12,10 @@ const Form = () => {
     symptoms: "",
   });
 
-  // state error campos vacios
+  // state error para campos vacios
   const [error, setError] = useState(false);
 
-  // state crear cita
+  // state almacenar las citas
   const [citas, setCitas] = useState([]);
 
   // actualizo el estado de cita
@@ -28,7 +29,7 @@ const Form = () => {
   // asignar los datos a las variables
   const { pet, owner, date, hour, symptoms } = cita;
 
-  // validar campos del form
+  // evento submit del form
   const submitCita = (e) => {
     e.preventDefault();
 
@@ -61,7 +62,6 @@ const Form = () => {
   };
 
   // modularizar este archivi submit cita
-
   return (
     <div className="container">
       <h1>Administrador de Citas</h1>
@@ -120,7 +120,13 @@ const Form = () => {
             </button>
           </form>
         </div>
-        <div className="one-half column">2</div>
+        <div className="one-half column">
+          <h2> Administra tus citas </h2>
+
+          {citas.map((e) => (
+            <Appointment key={e.id} appomt={e}></Appointment>
+          ))}
+        </div>
       </div>
     </div>
   );
