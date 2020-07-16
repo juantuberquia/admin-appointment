@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import uuid from "uuid/v4";
 import Appointment from "./Appointment";
 
@@ -61,7 +61,23 @@ const Form = () => {
     });
   };
 
-  // modularizar este archivi submit cita
+  // eliminar cita
+  const deleteAppomt = (id) => {
+    let newCitas = citas.filter((i) => i.id !== id);
+    setCitas(newCitas);
+  };
+
+  // cambio del titulo citas
+  const changeTitle =
+    citas.length === 0 ? "No hay citas" : "Administra tus citas";
+
+  // almacenar citas en local storage
+  useEffect(() => {
+    citas.map((i) => {
+      localStorage.setItem(i.id, JSON.stringify(citas));
+    });
+  }, [citas]);
+
   return (
     <div className="container">
       <h1>Administrador de Citas</h1>
@@ -121,10 +137,13 @@ const Form = () => {
           </form>
         </div>
         <div className="one-half column">
-          <h2> Administra tus citas </h2>
-
-          {citas.map((e) => (
-            <Appointment key={e.id} appomt={e}></Appointment>
+          <h2> {changeTitle} </h2>
+          {citas.map((i) => (
+            <Appointment
+              key={i.id}
+              appomt={i}
+              deleteAppomt={deleteAppomt}
+            ></Appointment>
           ))}
         </div>
       </div>

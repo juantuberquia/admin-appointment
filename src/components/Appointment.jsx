@@ -1,9 +1,10 @@
 import React from "react";
 
-const Appointment = ({ appomt }) => {
+const Appointment = ({ appomt, deleteAppomt }) => {
   return (
     <div className="cita">
       <p>
+        {/* Mascota <span>{getDataLocal.pet}</span> */}
         Mascota <span>{appomt.pet}</span>
       </p>
       <p>
@@ -18,6 +19,13 @@ const Appointment = ({ appomt }) => {
       <p>
         Sintomas <span>{appomt.symptoms}</span>
       </p>
+      <button
+        className="button eliminar u-full-width"
+        onClick={() => deleteAppomt(appomt.id)}
+      >
+        {" "}
+        ELIMINAR CITA &times;
+      </button>
     </div>
   );
 };
