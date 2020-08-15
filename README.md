@@ -1,3 +1,17 @@
+# admin-appointment
+
+
+## ✍🏻 Description
+This app was built in React.js, the goal, is  appointment manage.
+
+You can see the result here → [admin appointment]  https://adminappointment.netlify.app/
+
+## Technologies
+1. HTML
+2. CSS
+3. React.js -> hooks
+4. skeleton 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
